@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './domain/entities';
 import { UserController } from './presentation/controllers/user.controller';
 import { USER_REPOSITORY } from './domain/interfaces';
-import { UserRepository } from './infra/user.repository';
+import { UserRepository } from './infra/repositories/user.repository';
 import { CreateUserUseCase } from './application/use-cases';
 
 @Module({
