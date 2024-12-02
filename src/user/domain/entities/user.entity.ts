@@ -11,21 +11,18 @@ export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
+  name: string;
+
   @Column({ unique: true })
   email: string;
 
   @Column()
-  passwordHash: string;
+  password: string;
 
-  @Column({ nullable: true })
-  name: string;
-
-  @Column({ default: 'user' })
-  role: string;
-
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }

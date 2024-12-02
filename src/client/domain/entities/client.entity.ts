@@ -14,10 +14,10 @@ export class Client {
   @Column()
   name: string;
 
-  @Column('int')
+  @Column('int', { name: 'monthly_income' })
   monthlyIncome: number;
 
-  @Column('int')
+  @Column('int', { name: 'business_valuation' })
   businessValuation: number;
 
   @CreateDateColumn()
