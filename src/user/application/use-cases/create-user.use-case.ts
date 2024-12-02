@@ -1,7 +1,7 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { IUserRepository, USER_REPOSITORY } from '../../domain/interfaces';
-import { hash } from 'typeorm/util/StringUtils';
 import { UserEntity } from '../../domain/entities';
+import { hash } from 'bcryptjs';
 
 @Injectable()
 export class CreateUserUseCase {
@@ -16,7 +16,7 @@ export class CreateUserUseCase {
       throw new ConflictException('Email is already in use');
     }
 
-    const hashedPassword = hash(data.password, { length: 12 });
+    const hashedPassword = await hash(data.password, 10);
     await this.userRepository.create({ ...data, password: hashedPassword });
   }
 }
