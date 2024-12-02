@@ -13,8 +13,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         database: process.env.DB_NAME,
         entities: [__dirname + '../../**/*.entity{.ts,.js}'],
         logging: true,
-      })
-    })
-  ]
+      }),
+    }),
+  ],
 })
 export class DatabaseModule {}
