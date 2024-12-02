@@ -42,6 +42,7 @@ export class ClientController {
 
   @Delete(':id')
   async delete(@Param() params: ClientIdDTO) {
-    return await this.deleteClientUseCase.execute(params.id);
+    await this.deleteClientUseCase.execute(params.id);
+    return { message: 'Cliente deletado com sucesso!' };
   }
 }
