@@ -8,8 +8,7 @@ export class UserController {
 
   @Post()
   async createUser(@Body() data: CreateUserDTO): Promise<{ message: string }> {
-    console.log('a');
     await this.createUserUseCase.execute(data);
-    return { message: 'User created successfully' };
+    return { message: 'Usuário criado com sucesso!' };
   }
 }

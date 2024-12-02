@@ -13,7 +13,7 @@ export class CreateUserUseCase {
   async execute(data: Partial<UserEntity>): Promise<void> {
     const existingUser = await this.userRepository.findByEmail(data.email);
     if (existingUser) {
-      throw new ConflictException('Email is already in use');
+      throw new ConflictException('Já existe um usuário com este e-mail');
     }
 
     const hashedPassword = await hash(data.password, 10);
