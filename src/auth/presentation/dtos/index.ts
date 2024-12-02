@@ -1,1 +1,1 @@
-export { AuthenticateDto } from './authenticate.dto';
+export { AuthenticateDto } from './request/authenticate.dto';
