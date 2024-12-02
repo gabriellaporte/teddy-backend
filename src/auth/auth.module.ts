@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AUTH_SERVICE } from './domain/interfaces';
 import { AuthService } from './application/services';
 import { AuthenticateUseCase } from './application/use-cases';
+import { JwtStrategy } from './infra/passport/jwt.strategy';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AuthenticateUseCase } from './application/use-cases';
       useClass: AuthService,
     },
     AuthenticateUseCase,
+    JwtStrategy,
   ],
 })
 export class AuthModule {}
