@@ -6,7 +6,7 @@ import {
   USER_REPOSITORY,
 } from '../../../user/domain/interfaces';
 import { IAuthService } from '../../domain/interfaces';
-import { UserEntity } from '../../../user/domain/entities';
+import { User } from '../../../user/domain/entities';
 import { AuthenticateDto } from '../../presentation/dtos';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class AuthService implements IAuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(data: AuthenticateDto): Promise<UserEntity> {
+  async validateUser(data: AuthenticateDto): Promise<User> {
     const { email, password } = data;
     const user = await this.userRepository.findByEmail(email);
     if (user && (await compare(password, user.password))) {
@@ -26,7 +26,7 @@ export class AuthService implements IAuthService {
     throw new UnauthorizedException('Credenciais incorretas!');
   }
 
-  async login(user: UserEntity): Promise<IAuthService.AccessToken> {
+  async login(user: User): Promise<IAuthService.AccessToken> {
     const payload = { email: user.email, sub: user.id };
     return { accessToken: this.jwtService.sign(payload) };
   }

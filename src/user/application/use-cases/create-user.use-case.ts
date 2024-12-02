@@ -1,6 +1,6 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { IUserRepository, USER_REPOSITORY } from '../../domain/interfaces';
-import { UserEntity } from '../../domain/entities';
+import { User } from '../../domain/entities';
 import { hash } from 'bcryptjs';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class CreateUserUseCase {
     private readonly userRepository: IUserRepository,
   ) {}
 
-  async execute(data: Partial<UserEntity>): Promise<void> {
+  async execute(data: Partial<User>): Promise<void> {
     const existingUser = await this.userRepository.findByEmail(data.email);
     if (existingUser) {
       throw new ConflictException('Já existe um usuário com este e-mail');
