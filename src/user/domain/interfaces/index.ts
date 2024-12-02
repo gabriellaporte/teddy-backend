@@ -1,1 +1,1 @@
-export { IUserRepository } from './user-repository.interface';
+export { IUserRepository, USER_REPOSITORY } from './user-repository.interface';

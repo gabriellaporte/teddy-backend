@@ -4,10 +4,11 @@ export class CreateUserDTO {
   @IsNotEmpty({ message: 'Você deve especificar o nome de usuário' })
   name: string;
 
-  @IsEmail({}, { message: 'E-mail inválido' })
+  @IsEmail({}, { message: 'Você deve especificar um e-mail válido.' })
   email: string;
 
-  @IsNotEmpty({ message: 'Você deve especificar a sua senha' })
-  @MinLength(6, { message: 'A senha deve ter pelo menos 6 caracteres' })
+  @MinLength(6, {
+    message: 'Você deve especificar uma senha de pelo menos 6 caracteres',
+  })
   password: string;
 }

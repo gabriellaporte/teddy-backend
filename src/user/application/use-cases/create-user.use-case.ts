@@ -1,11 +1,14 @@
-import { ConflictException, Injectable } from '@nestjs/common';
-import { IUserRepository } from '../../domain/interfaces';
+import { ConflictException, Inject, Injectable } from '@nestjs/common';
+import { IUserRepository, USER_REPOSITORY } from '../../domain/interfaces';
 import { hash } from 'typeorm/util/StringUtils';
 import { UserEntity } from '../../domain/entities';
 
 @Injectable()
 export class CreateUserUseCase {
-  constructor(private readonly userRepository: IUserRepository) {}
+  constructor(
+    @Inject(USER_REPOSITORY)
+    private readonly userRepository: IUserRepository,
+  ) {}
 
   async execute(data: Partial<UserEntity>): Promise<void> {
     const existingUser = await this.userRepository.findByEmail(data.email);
