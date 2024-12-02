@@ -10,13 +10,16 @@ export class CreateUserUseCase {
     private readonly userRepository: IUserRepository,
   ) {}
 
-  async execute(data: Partial<User>): Promise<void> {
+  async execute(data: Partial<User>): Promise<User> {
     const existingUser = await this.userRepository.findByEmail(data.email);
     if (existingUser) {
       throw new ConflictException('Já existe um usuário com este e-mail');
     }
 
     const hashedPassword = await hash(data.password, 10);
-    await this.userRepository.create({ ...data, password: hashedPassword });
+    return await this.userRepository.create({
+      ...data,
+      password: hashedPassword,
+    });
   }
 }
