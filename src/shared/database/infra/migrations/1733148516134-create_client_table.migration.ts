@@ -18,7 +18,7 @@ export class CreateClientTable1733148516134 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'income',
+            name: 'monthly_income',
             type: 'int',
           },
           {
