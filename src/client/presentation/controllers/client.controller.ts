@@ -13,6 +13,7 @@ import { GetClientsUseCase } from '../../application/use-cases/get-clients.use-c
 import { UpdateClientUseCase } from '../../application/use-cases/update-client.use-case';
 import { DeleteClientUseCase } from '../../application/use-cases/delete-client.use-case';
 import { CreateClientDTO, PaginateClientsDTO, UpdateClientDTO } from '../dtos';
+import { ClientIdDTO } from '../dtos/client-id.dto';
 
 @Controller('clients')
 export class ClientController {
@@ -35,12 +36,12 @@ export class ClientController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() data: UpdateClientDTO) {
-    return await this.updateClientUseCase.execute(id, data);
+  async update(@Param() params: ClientIdDTO, @Body() data: UpdateClientDTO) {
+    return await this.updateClientUseCase.execute(params.id, data);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
-    return await this.deleteClientUseCase.execute(id);
+  async delete(@Param() params: ClientIdDTO) {
+    return await this.deleteClientUseCase.execute(params.id);
   }
 }

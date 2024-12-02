@@ -13,7 +13,7 @@ export class UpdateClientUseCase {
   async execute(id: string, data: UpdateClientDTO) {
     const client = await this.clientRepository.findById(id);
     if (!client) {
-      throw new NotFoundException('Houve um erro ao atualizar o cliente');
+      throw new NotFoundException('Cliente não encontrado!');
     }
     return await this.clientRepository.update(id, data);
   }

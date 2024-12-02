@@ -12,7 +12,7 @@ export class DeleteClientUseCase {
   async execute(id: string) {
     const client = await this.clientRepository.findById(id);
     if (!client) {
-      throw new NotFoundException('Houve um erro ao deletar o cliente');
+      throw new NotFoundException('Cliente não encontrado!');
     }
     await this.clientRepository.delete(id);
   }
