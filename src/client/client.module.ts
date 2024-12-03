@@ -8,6 +8,10 @@ import { UpdateClientUseCase } from './application/use-cases/update-client.use-c
 import { DeleteClientUseCase } from './application/use-cases/delete-client.use-case';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Client } from './domain/entities';
+import { ClientMessageBroker } from './infra/brokers/client-message.broker';
+import { CLIENT_MESSAGE_BROKER } from './domain/interfaces';
+import { MESSAGE_BROKER } from '../shared/message-broker/domain/interfaces';
+import { RabbitMQBroker } from '../shared/message-broker/infra/brokers/rabbit-mq.broker';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Client])],
@@ -16,6 +20,14 @@ import { Client } from './domain/entities';
     {
       provide: CLIENT_REPOSITORY,
       useClass: ClientRepository,
+    },
+    {
+      provide: CLIENT_MESSAGE_BROKER,
+      useClass: ClientMessageBroker,
+    },
+    {
+      provide: MESSAGE_BROKER,
+      useClass: RabbitMQBroker,
     },
     CreateClientUseCase,
     GetClientsUseCase,
