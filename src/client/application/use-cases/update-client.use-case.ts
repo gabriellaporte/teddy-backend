@@ -29,23 +29,7 @@ export class UpdateClientUseCase {
   }
 
   private async publishEvent(previous: Client, updated: Client) {
-    const updatedFields = this.getUpdatedFields(previous, updated);
     const event = new ClientUpdatedEvent(updated.id, previous, updated);
     await this.clientMessageBroker.publishClientUpdated(event);
-  }
-
-  private getUpdatedFields(
-    previous: Client,
-    updated: Client,
-  ): Record<string, any> {
-    const updatedFields: Record<string, any> = {};
-
-    Object.keys(updated).forEach((key) => {
-      if (updated[key] !== previous[key]) {
-        updatedFields[key] = updated[key];
-      }
-    });
-
-    return updatedFields;
   }
 }
