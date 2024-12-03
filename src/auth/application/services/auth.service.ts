@@ -28,6 +28,10 @@ export class AuthService implements IAuthService {
 
   async login(user: User): Promise<IAuthService.AccessToken> {
     const payload = { email: user.email, sub: user.id };
-    return { accessToken: this.jwtService.sign(payload) };
+    return {
+      accessToken: this.jwtService.sign(payload, {
+        secret: process.env.JWT_SECRET,
+      }),
+    };
   }
 }
