@@ -3,7 +3,7 @@ import { Channel, connect, Connection } from 'amqplib';
 import { IMessageBroker } from '../../domain/interfaces';
 
 @Injectable()
-export class RabbitMQBroker implements IMessageBroker, OnModuleInit {
+export class RabbitMQClient implements IMessageBroker, OnModuleInit {
   private connection: Connection;
   private channel: Channel;
 
@@ -12,6 +12,10 @@ export class RabbitMQBroker implements IMessageBroker, OnModuleInit {
       `amqp://${process.env.RABBITMQ_HOST}:${process.env.RABBITMQ_PORT}`,
     );
     this.channel = await this.connection.createChannel();
+
+    await this.channel.assertExchange('client-events', 'topic', {
+      durable: true,
+    });
   }
 
   async publish(

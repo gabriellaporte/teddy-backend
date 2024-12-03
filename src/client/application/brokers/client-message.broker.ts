@@ -1,5 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import {
+  CLIENT_CREATED_EVENT,
+  CLIENT_DELETED_EVENT,
+  CLIENT_UPDATED_EVENT,
   ClientCreatedEvent,
   ClientDeletedEvent,
   ClientUpdatedEvent,
@@ -7,7 +10,7 @@ import {
 import {
   IMessageBroker,
   MESSAGE_BROKER,
-} from '../../../shared/message-broker/domain/interfaces/';
+} from '../../../shared/message-broker/domain/interfaces';
 import {
   CLIENT_EVENTS_EXCHANGE,
   IClientMessageBroker,
@@ -22,7 +25,7 @@ export class ClientMessageBroker implements IClientMessageBroker {
   async publishClientCreated(event: ClientCreatedEvent): Promise<void> {
     await this.messageBroker.publish(
       CLIENT_EVENTS_EXCHANGE,
-      'client.created',
+      CLIENT_CREATED_EVENT,
       event,
     );
   }
@@ -30,7 +33,7 @@ export class ClientMessageBroker implements IClientMessageBroker {
   async publishClientUpdated(event: ClientUpdatedEvent): Promise<void> {
     await this.messageBroker.publish(
       CLIENT_EVENTS_EXCHANGE,
-      'client.updated',
+      CLIENT_UPDATED_EVENT,
       event,
     );
   }
@@ -38,7 +41,7 @@ export class ClientMessageBroker implements IClientMessageBroker {
   async publishClientDeleted(event: ClientDeletedEvent): Promise<void> {
     await this.messageBroker.publish(
       CLIENT_EVENTS_EXCHANGE,
-      'client.deleted',
+      CLIENT_DELETED_EVENT,
       event,
     );
   }
