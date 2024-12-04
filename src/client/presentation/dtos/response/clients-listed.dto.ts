@@ -15,4 +15,15 @@ export class ClientsListedDTO {
       'Os clientes. Os valores de salário e valor de empresa estão em centavos.',
   })
   data: Client[];
+
+  @ApiProperty({
+    example: [
+      {
+        totalPages: 5,
+      },
+    ],
+    description:
+      'Metadados contendo o total de páginas de clientes disponíveis.',
+  })
+  meta: object;
 }
