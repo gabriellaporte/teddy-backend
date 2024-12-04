@@ -83,15 +83,20 @@ describe('AuthService', () => {
     it('should return an access token for a valid user', async () => {
       const userEntity = mockUserEntity();
       const accessToken = 'mocked_access_token';
-      mockJwtService.sign.mockReturnValueOnce(accessToken);
+      const jwtSecret = 'mocked_jwt_secret';
+      process.env.JWT_SECRET = jwtSecret;
 
+      mockJwtService.sign.mockReturnValueOnce(accessToken);
       const result = await authService.login(userEntity);
 
       expect(result).toEqual({ accessToken });
-      expect(mockJwtService.sign).toHaveBeenCalledWith({
-        email: userEntity.email,
-        sub: userEntity.id,
-      });
+      expect(mockJwtService.sign).toHaveBeenCalledWith(
+        {
+          email: userEntity.email,
+          sub: userEntity.id,
+        },
+        { secret: jwtSecret },
+      );
     });
   });
 });

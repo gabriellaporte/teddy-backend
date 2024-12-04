@@ -10,6 +10,7 @@ import {
   UpdateClientDTO,
 } from '../../dtos';
 import { ClientIdDTO } from '../../dtos/request/client-id.dto';
+import { GetTotalClientPagesUseCase } from '../../../application/use-cases/get-total-client-pages.use-case';
 
 describe('ClientController', () => {
   let controller: ClientController;
@@ -23,6 +24,7 @@ describe('ClientController', () => {
     const mockGetClientsUseCase = { execute: jest.fn() };
     const mockUpdateClientUseCase = { execute: jest.fn() };
     const mockDeleteClientUseCase = { execute: jest.fn() };
+    const mockGetTotalClientPagesUseCase = { execute: jest.fn() };
 
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ClientController],
@@ -31,6 +33,10 @@ describe('ClientController', () => {
         { provide: GetClientsUseCase, useValue: mockGetClientsUseCase },
         { provide: UpdateClientUseCase, useValue: mockUpdateClientUseCase },
         { provide: DeleteClientUseCase, useValue: mockDeleteClientUseCase },
+        {
+          provide: GetTotalClientPagesUseCase,
+          useValue: mockGetTotalClientPagesUseCase,
+        },
       ],
     }).compile();
 

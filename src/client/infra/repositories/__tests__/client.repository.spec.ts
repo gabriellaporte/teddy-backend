@@ -80,7 +80,7 @@ describe('ClientRepository', () => {
     const result = await clientRepository.findAll(pagination);
 
     expect(mockRepository.find).toHaveBeenCalledWith({
-      skip: pagination.page,
+      skip: pagination.page * pagination.perPage - pagination.perPage,
       take: pagination.perPage,
     });
     expect(result).toEqual(clients);
