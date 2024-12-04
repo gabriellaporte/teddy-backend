@@ -1,8 +1,9 @@
-import { IsInt, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateClientDTO {
   @ApiProperty({ example: 'John Doe', description: 'Nome do cliente' })
+  @IsNotEmpty({ message: 'Você deve especificar o nome do cliente' })
   @IsString({ message: 'Você deve especificar o nome do cliente' })
   name: string;
 

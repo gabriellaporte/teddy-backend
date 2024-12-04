@@ -19,11 +19,11 @@ export class CreateClientTable1733148516134 implements MigrationInterface {
           },
           {
             name: 'monthly_income',
-            type: 'int',
+            type: 'bigint',
           },
           {
             name: 'business_valuation',
-            type: 'int',
+            type: 'bigint',
           },
           {
             name: 'created_at',
