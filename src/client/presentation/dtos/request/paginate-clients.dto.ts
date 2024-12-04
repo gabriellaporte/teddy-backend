@@ -10,14 +10,14 @@ export class PaginateClientsDTO {
   @IsPositive()
   @IsOptional()
   @Type(() => Number)
-  limit?: number;
+  perPage?: number;
 
   @ApiProperty({
-    example: 0,
-    description: 'Página atual, começando de 0',
+    example: 1,
+    description: 'Página atual, começando de 1',
   })
   @IsPositive()
   @IsOptional()
   @Type(() => Number)
-  offset?: number;
+  page?: number;
 }

@@ -75,13 +75,13 @@ describe('ClientRepository', () => {
     ];
     mockRepository.find.mockResolvedValue(clients);
 
-    const pagination = { limit: 10, offset: 0 };
+    const pagination = { perPage: 10, page: 0 };
 
     const result = await clientRepository.findAll(pagination);
 
     expect(mockRepository.find).toHaveBeenCalledWith({
-      skip: pagination.offset,
-      take: pagination.limit,
+      skip: pagination.page,
+      take: pagination.perPage,
     });
     expect(result).toEqual(clients);
   });

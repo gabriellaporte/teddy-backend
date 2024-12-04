@@ -21,6 +21,7 @@ import {
 import { ClientIdDTO } from '../dtos/request/client-id.dto';
 import { ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { ClientCreatedDTO } from '../dtos/response/client-created.dto';
+import { GetTotalClientPagesUseCase } from '../../application/use-cases/get-total-client-pages.use-case';
 
 @Controller('clients')
 export class ClientController {
@@ -29,6 +30,7 @@ export class ClientController {
     private readonly getClientsUseCase: GetClientsUseCase,
     private readonly updateClientUseCase: UpdateClientUseCase,
     private readonly deleteClientUseCase: DeleteClientUseCase,
+    private readonly getTotalClientPagesUseCase: GetTotalClientPagesUseCase,
   ) {}
 
   @Get()
@@ -38,8 +40,13 @@ export class ClientController {
     type: ClientsListedDTO,
   })
   async findAll(@Query() query: PaginateClientsDTO) {
-    const { limit = 10, offset = 0 } = query;
-    return await this.getClientsUseCase.execute({ limit, offset });
+    const { perPage = 10, page = 1 } = query;
+    return {
+      data: await this.getClientsUseCase.execute({ perPage, page }),
+      meta: {
+        totalPages: await this.getTotalClientPagesUseCase.execute(perPage),
+      },
+    };
   }
 
   @Post()

@@ -5,6 +5,8 @@ export interface IClientRepository {
 
   findAll(pagination: IClientRepository.Pagination): Promise<Client[]>;
 
+  getTotalPages(perPage: number): Promise<number>;
+
   findById(id: string): Promise<Client | null>;
 
   update(id: string, data: Partial<Client>): Promise<Client>;
@@ -16,7 +18,7 @@ export const CLIENT_REPOSITORY = 'IClientRepository';
 
 export namespace IClientRepository {
   export type Pagination = {
-    limit: number;
-    offset: number;
+    perPage: number;
+    page: number;
   };
 }

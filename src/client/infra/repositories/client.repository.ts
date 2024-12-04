@@ -17,20 +17,22 @@ export class ClientRepository implements IClientRepository {
   }
 
   async findAll({
-    limit,
-    offset,
-  }: {
-    limit: number;
-    offset: number;
-  }): Promise<Client[]> {
+    perPage,
+    page,
+  }: IClientRepository.Pagination): Promise<Client[]> {
     return await this.clientRepository.find({
-      skip: offset,
-      take: limit,
+      skip: (page - 1) * perPage,
+      take: perPage,
     });
   }
 
   async findById(id: string): Promise<Client | null> {
     return await this.clientRepository.findOneBy({ id });
+  }
+
+  async getTotalPages(perPage: number): Promise<number> {
+    const total = await this.clientRepository.count();
+    return Math.ceil(total / perPage);
   }
 
   async update(id: string, data: Partial<Client>): Promise<Client> {

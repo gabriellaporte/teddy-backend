@@ -42,7 +42,7 @@ describe('ClientController', () => {
   });
 
   it('should call GetClientsUseCase with correct parameters', async () => {
-    const query: PaginateClientsDTO = { limit: 5, offset: 10 };
+    const query: PaginateClientsDTO = { page: 5, perPage: 10 };
     jest.spyOn(getClientsUseCase, 'execute').mockResolvedValue([]);
 
     await controller.findAll(query);

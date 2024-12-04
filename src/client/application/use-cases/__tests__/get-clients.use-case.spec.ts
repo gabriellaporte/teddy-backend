@@ -27,7 +27,7 @@ describe('GetClientsUseCase', () => {
   });
 
   it('should call clientRepository.findAll with the correct pagination parameters', async () => {
-    const pagination = { offset: 1, limit: 10 };
+    const pagination = { page: 1, perPage: 10 };
     const mockClients = [
       {
         id: '1',

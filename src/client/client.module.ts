@@ -15,6 +15,7 @@ import { RabbitMQClient } from '../shared/message-broker/infra/brokers/rabbit-mq
 import { ClientCreatedConsumer } from './application/brokers/consumers/client-created.consumer';
 import { ClientUpdatedConsumer } from './application/brokers/consumers/client-updated.consumer';
 import { ClientDeletedConsumer } from './application/brokers/consumers/client-deleted.consumer';
+import { GetTotalClientPagesUseCase } from './application/use-cases/get-total-client-pages.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Client])],
@@ -36,6 +37,7 @@ import { ClientDeletedConsumer } from './application/brokers/consumers/client-de
     GetClientsUseCase,
     UpdateClientUseCase,
     DeleteClientUseCase,
+    GetTotalClientPagesUseCase,
     ClientCreatedConsumer,
     ClientUpdatedConsumer,
     ClientDeletedConsumer,
