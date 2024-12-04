@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import dataSource from '../../../ormconfig';
 
 @Module({
   imports: [
@@ -17,4 +18,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
   ],
 })
-export class DatabaseModule {}
+export class DatabaseModule implements OnModuleInit {
+  onModuleInit(): any {
+    dataSource.initialize().then(async () => {
+      console.log('Database inicializada! Verificando migrations...');
+      await dataSource.runMigrations();
+    });
+  }
+}
