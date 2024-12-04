@@ -1,9 +1,4 @@
 import { DataSource } from 'typeorm';
-import * as dotenv from 'dotenv';
-
-dotenv.config({ path: __dirname + '/../../infra/.env' });
-
-console.log(process.env.DB_HOST);
 
 const dataSource = new DataSource({
   type: 'postgres',

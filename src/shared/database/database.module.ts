@@ -21,7 +21,7 @@ import dataSource from '../../../ormconfig';
 export class DatabaseModule implements OnModuleInit {
   onModuleInit(): any {
     dataSource.initialize().then(async () => {
-      console.log('Database inicializada! Verificando migrations...');
+      console.log('Database inicializada! 🚀');
       await dataSource.runMigrations();
     });
   }
