@@ -163,5 +163,4 @@ Com o backend configurado e rodando, você pode acessar e interagir com o sistem
 Este backend foi desenvolvido com muita atenção aos detalhes, incorporando boas práticas de desenvolvimento e
 organização. Ele está preparado para atender aos requisitos do sistema e crescer com facilidade.
 
-Se houver dúvidas ou sugestões, estarei à disposição para esclarecimentos. Obrigado pela oportunidade de mostrar meu
-trabalho e contribuir com este teste técnico.
+Se houver dúvidas ou sugestões, estou às ordens.
